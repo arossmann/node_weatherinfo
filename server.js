@@ -1,25 +1,35 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
-
-const path = __dirname + '/views/';
+const bodyParser = require('body-parser');
 const port = 8080;
+const request = require('request');
+const apiKey = '*****************';
 
-router.use(function (req,res,next) {
-  console.log('/' + req.method);
-  next();
-});
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.set('view engine', 'ejs')
 
-router.get('/', function(req,res){
-  res.sendFile(path + 'index.html');
-});
-
-router.get('/weather', function(req,res){
-  res.sendFile(path + 'weather.html')
+app.get('/', function (req, res) {
+  res.render('index');
 })
 
-app.use(express.static(path));
-app.use('/', router);
+app.post('/', function (req, res) {
+  let city = req.body.city;
+  let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+request(url, function (err, response, body) {
+    if(err){
+      res.render('index', {weather: null, error: 'Error, please try again'});
+    } else {
+      let weather = JSON.parse(body)
+      if(weather.main == undefined){
+        res.render('index', {weather: null, error: 'Error, please try again'});
+      } else {
+        let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+        res.render('index', {weather: weatherText, error: null});
+      }
+    }
+  });
+})
 
 app.listen(port, function () {
   console.log('Example app listening on port 8080!')

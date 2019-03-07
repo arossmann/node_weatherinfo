@@ -9,6 +9,8 @@ WORKDIR /home/node/app
 USER node
 
 RUN npm install --save express
+RUN npm install ejs --save
+RUN npm install body-parser --save
 
 COPY --chown=node:node . .
 
