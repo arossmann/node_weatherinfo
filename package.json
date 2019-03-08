@@ -1,0 +1,25 @@
+{
+	"name": "node_weatherinfo",
+	"version": "1.0.0",
+	"description": "Node.js weather app on docker",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/arossmann/node_weatherinfo.git"
+	},
+	"author": "Arne Rossmann <arne.rossmann@gmail.com>",
+	"bugs": {
+		"url": "https://github.com/arossmann/node_weatherinfo/issues"
+	},
+	"homepage": "https://github.com/arossmann/node_weatherinfo",
+	"dependencies": {
+		"express": "^4.16.4",
+		"ejs": "2.6.1",
+		"body-parser": "1.18.3",
+		"request": "^2.81.0"
+	}
+}
