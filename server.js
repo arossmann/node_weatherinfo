@@ -3,7 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 8080;
 const request = require('request');
-const apiKey = '##################';
+let apiKey = process.env.APIKEY;
+app.set('apiKey', apiKey);
+//const apiKey = '##################';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
