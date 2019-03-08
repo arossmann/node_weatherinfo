@@ -29,7 +29,6 @@ request(url, function (err, response, body) {
         var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
         //console.log("weather:"+iconCode+" "+iconUrl)
         let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-        //$(".icon").html("<img class = 'newIcon' src=" + iconUrl + ">");
         res.render('pages/index', {weather: weatherText, weatherIcon: iconUrl, error: null});
       }
     }
