@@ -1,22 +1,24 @@
 #!/bin/bash
+# inspired by https://itnext.io/docker-makefile-x-ops-sharing-infra-as-code-parts-ea6fa0d22946
 
 # Help function -h and welcome message
 usage() {
   cat <<EOF
 Usage:
-make.sh <option> -e <ARGS> (optional)
+make.sh <option>
 -h		show this help
 -b		build docker --image--
 -r		rebuild docker --image--
 -t		test docker --container--
 -s		run as service --container--
 -c		remove docker --image--
+-p    additional parameters
 
 EOF
 }
 
 # default
-SERVICE_TARGET="."
+SERVICE_TARGET="node"
 
 # Reset the variables
 BUILD=0
@@ -24,9 +26,10 @@ REBUILD=0
 TEST=0
 SERVICE=0
 CLEAN=0
+EXTRA=0
 
 # Parse parameters
-while getopts 'hbrtsc' OPTION ; do
+while getopts 'hbrtscp:' OPTION ; do
   case "$OPTION" in
     h)  usage
 		exit 0;;
@@ -35,6 +38,8 @@ while getopts 'hbrtsc' OPTION ; do
     t)  TEST=1;;
     s)  SERVICE=1;;
     c)  CLEAN=1;;
+    p)  EXTRA=1
+        EXTRA_VALUE="$OPTARG";;
     *)  echo "Unknown parameter"
   esac
 done
