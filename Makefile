@@ -7,7 +7,6 @@ default: build ## default = build
 build: ## build the image
 	docker build -t $(DOCKER_IMAGE_TAGNAME) .
 	docker tag $(DOCKER_IMAGE_TAGNAME) $(DOCKER_IMAGE_NAME):latest
-	docker tag $(DOCKER_IMAGE_TAGNAME) $(REGISTRY)/$(DOCKER_IMAGE_NAME):latest
 
 test: ## test the image
 	docker run --rm $(DOCKER_IMAGE_TAGNAME) /bin/echo "Success."
