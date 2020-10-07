@@ -9,8 +9,22 @@
           <input type="submit" class="ghost-button" value="Get Weather">
         </form>
         <% if(weather !== null){ %>
-          <p><%= weather %></p>
-          <p><img class = 'newIcon' src="<%= weatherIcon %>"></p>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Weather in <%= weather_city_name %>, <%= weather_city_country %></h5>
+              <img class = 'newIcon' src="<%= weatherIcon %>">
+              <p class="display-1"><%= weather_temp %><sup>o</sup>C</p>
+              <span class="text-muted">Feels like <%= weather_feels_like %><sup>o</sup>C</span>
+              <h5 class="text-capitalize font-weight-bold"><%= weather_description %></h5>
+              <div class="overflow-x">
+                <span class="pr-5 inf"><i class="fas fa-wind"></i> Wind <%= weather_wind_speed %> m/sec</span>
+                <span class="pr-5 inf"><i class="fas fa-paper-plane"></i> Pressure <%= weather_pressure %> mb</span>
+                <span class="pr-5 inf"><i class="fas fa-tint"></i> Humidity <%= weather_humidity %>%</span>
+                <span class="pr-5 inf"><i class="fas fa-eye"></i> Visibility <%= weather_visibility/1000 %> km</span>
+                <span class="pr-5 inf"><i class="fas fa-cloud"></i> Cloudiness <%= weather_clouds %>%</span>
+              </div>
+            </div>
+          </div>
         <% } %>
         <% if(error !== null){ %>
           <p><%= error %></p>

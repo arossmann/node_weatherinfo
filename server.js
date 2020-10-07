@@ -29,7 +29,20 @@ request(url, function (err, response, body) {
         var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
         //console.log("weather:"+iconCode+" "+iconUrl)
         let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-        res.render('index', {weather: weatherText, weatherIcon: iconUrl, error: null});
+        res.render('index', 
+          { weather: weatherText,
+            weather_city_name: weather.name, 
+            weatherIcon: iconUrl, 
+            weather_city_country: weather.sys.country,
+            weather_temp: weather.main.temp,
+            weather_feels_like: weather.main.feels_like,
+            weather_description: weather.weather[0].description,
+            weather_wind_speed: weather.wind.speed,
+            weather_pressure: weather.main.pressure,
+            weather_humidity: weather.main.humidity,
+            weather_visibility: weather.visibility/1000,
+            weather_clouds: weather.clouds.all,
+            error: null});
       }
     }
   });
